@@ -4,7 +4,7 @@
       class="w-[600px] p-2.5 border border-gray-300 rounded-lg bg-white shadow-sm"
     >
       <Header :addTodo="addTodo" />
-      <List :todos="todos" :deleteTodo="deleteTodo" />
+      <List :todos="todos" :deleteTodo="deleteTodo" :updateTodo="updateTodo" />
       <Footer />
     </div>
   </div>
@@ -41,10 +41,16 @@ export default defineComponent({
       state.todos.splice(index, 1);
     };
 
+    const updateTodo = (todo: Todo, isCompleted: boolean) => {
+      todo.isCompleted = isCompleted;
+      console.log(todo);
+    };
+
     return {
       ...toRefs(state),
       addTodo,
       deleteTodo,
+      updateTodo,
     };
   },
 });

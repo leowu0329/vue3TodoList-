@@ -16,7 +16,11 @@
     ]"
   >
     <label class="float-left cursor-pointer">
-      <input type="checkbox" class="align-middle mr-1.5 relative -top-px" />
+      <input
+        type="checkbox"
+        class="align-middle mr-1.5 relative -top-px"
+        v-model="isComplete"
+      />
       <span>{{ todo?.title }}</span>
     </label>
     <button
@@ -33,7 +37,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue';
 import { Todo } from '../types/todo';
-
+import { computed } from '@vue/reactivity';
 export default defineComponent({
   name: 'Item',
   props: {
@@ -47,6 +51,10 @@ export default defineComponent({
     },
     index: {
       type: Number,
+      required: true,
+    },
+    updateTodo: {
+      type: Function,
       required: true,
     },
   },
@@ -73,12 +81,22 @@ export default defineComponent({
       }
     };
 
+    const isComplete = computed({
+      get() {
+        return props.todo.isCompleted;
+      },
+      set(val) {
+        props.updateTodo(props.todo, val);
+      },
+    });
+
     return {
       mouseHandler,
       bgColor,
       myColor,
       isShow,
       delTodo,
+      isComplete,
     };
   },
 });
