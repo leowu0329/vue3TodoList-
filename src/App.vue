@@ -5,7 +5,11 @@
     >
       <Header :addTodo="addTodo" />
       <List :todos="todos" :deleteTodo="deleteTodo" :updateTodo="updateTodo" />
-      <Footer :todos="todos" :checkAll="checkAll" />
+      <Footer
+        :todos="todos"
+        :checkAll="checkAll"
+        :clearAllCompletedTodos="clearAllCompletedTodos"
+      />
     </div>
   </div>
 </template>
@@ -52,12 +56,17 @@ export default defineComponent({
       });
     };
 
+    const clearAllCompletedTodos = () => {
+      state.todos = state.todos.filter((todo) => !todo.isCompleted);
+    };
+
     return {
       ...toRefs(state),
       addTodo,
       deleteTodo,
       updateTodo,
       checkAll,
+      clearAllCompletedTodos,
     };
   },
 });

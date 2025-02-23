@@ -12,6 +12,7 @@
     </span>
     <button
       class="ml-auto mt-1 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded"
+      @click="clearAllCompletedTodos"
     >
       清除已完成任务
     </button>
@@ -33,6 +34,10 @@ export default defineComponent({
       type: Function,
       required: true,
     },
+    clearAllCompletedTodos: {
+      type: Function,
+      required: true,
+    },
   },
   setup(props) {
     const count = computed(() => {
@@ -50,6 +55,7 @@ export default defineComponent({
         props.checkAll(val);
       },
     });
+
     return {
       count,
       isCheckAll,
