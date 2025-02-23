@@ -3,7 +3,7 @@
     <div
       class="w-[600px] p-2.5 border border-gray-300 rounded-lg bg-white shadow-sm"
     >
-      <Header />
+      <Header :addTodo="addTodo" />
       <List :todos="todos" />
       <Footer />
     </div>
@@ -32,8 +32,14 @@ export default defineComponent({
         { id: 3, title: '看電影', isCompleted: false },
       ],
     });
+
+    const addTodo = (todo: Todo) => {
+      state.todos.unshift(todo);
+    };
+
     return {
       ...toRefs(state),
+      addTodo, // Added addTodo to the returned object to fix the template binding error
     };
   },
 });
