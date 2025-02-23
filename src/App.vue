@@ -1,34 +1,26 @@
 <template>
-  <div class="todo-container">
-    <div class="todo-wrap">
-      <div class="todo-header">
-        <input type="text" placeholder="请输入你的任务名称，按回车键确认" />
-      </div>
-      <ul class="todo-main">
-        <li>
-          <label>
-            <input type="checkbox" />
-            <span>xxxxx</span>
-          </label>
-          <button class="btn btn-danger" style="display: none">删除</button>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" />
-            <span>yyyy</span>
-          </label>
-          <button class="btn btn-danger" style="display: none">删除</button>
-        </li>
-      </ul>
-      <div class="todo-footer">
-        <label>
-          <input type="checkbox" />
-        </label>
-        <span> <span>已完成0</span> / 全部2 </span>
-        <button class="btn btn-danger">清除已完成任务</button>
-      </div>
+  <div class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div
+      class="w-[600px] p-2.5 border border-gray-300 rounded-lg bg-white shadow-sm"
+    >
+      <Header />
+      <List />
+      <Footer />
     </div>
   </div>
 </template>
 
-<script></script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import Header from './components/Header.vue';
+import List from './components/List.vue';
+import Footer from './components/Footer.vue';
+export default defineComponent({
+  name: 'App',
+  components: {
+    Header,
+    List,
+    Footer,
+  },
+});
+</script>
