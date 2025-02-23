@@ -1,6 +1,6 @@
 <template>
   <ul class="list-none p-0 border border-gray-300 rounded-md">
-    <Item />
+    <Item v-for="(todo, index) in todos" :key="todo.id" :todo="todo" />
   </ul>
 </template>
 
@@ -13,9 +13,6 @@ export default defineComponent({
   components: {
     Item,
   },
+  props: ['todos'],
 });
 </script>
-
-<style>
-/* 如果需要保留一些自定义样式，可以在这里添加 */
-</style>
