@@ -5,7 +5,7 @@
     >
       <Header :addTodo="addTodo" />
       <List :todos="todos" :deleteTodo="deleteTodo" :updateTodo="updateTodo" />
-      <Footer />
+      <Footer :todos="todos" :checkAll="checkAll" />
     </div>
   </div>
 </template>
@@ -46,11 +46,18 @@ export default defineComponent({
       console.log(todo);
     };
 
+    const checkAll = (isCompleted: boolean) => {
+      state.todos.forEach((todo) => {
+        todo.isCompleted = isCompleted;
+      });
+    };
+
     return {
       ...toRefs(state),
       addTodo,
       deleteTodo,
       updateTodo,
+      checkAll,
     };
   },
 });
