@@ -22,7 +22,8 @@
     <button
       :class="['btn', 'btn-danger', isShow ? 'block' : 'hidden']"
       class="float-right hidden mt-0.75 bg-red-500 text-white px-2 py-1 rounded"
-      style="display: none"
+      v-show="isShow"
+      @click="delTodo"
     >
       删除
     </button>
@@ -40,8 +41,16 @@ export default defineComponent({
       type: Object as PropType<Todo>,
       required: true,
     },
+    deleteTodo: {
+      type: Function,
+      required: true,
+    },
+    index: {
+      type: Number,
+      required: true,
+    },
   },
-  setup() {
+  setup(props) {
     const bgColor = ref('bg-white');
     const myColor = ref('text-black');
     const isShow = ref(false);
@@ -58,11 +67,18 @@ export default defineComponent({
       }
     };
 
+    const delTodo = () => {
+      if (window.confirm('確定要刪除嗎 ?')) {
+        props.deleteTodo(props.index);
+      }
+    };
+
     return {
       mouseHandler,
       bgColor,
       myColor,
       isShow,
+      delTodo,
     };
   },
 });

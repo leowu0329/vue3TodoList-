@@ -4,7 +4,7 @@
       class="w-[600px] p-2.5 border border-gray-300 rounded-lg bg-white shadow-sm"
     >
       <Header :addTodo="addTodo" />
-      <List :todos="todos" />
+      <List :todos="todos" :deleteTodo="deleteTodo" />
       <Footer />
     </div>
   </div>
@@ -37,9 +37,14 @@ export default defineComponent({
       state.todos.unshift(todo);
     };
 
+    const deleteTodo = (index: number) => {
+      state.todos.splice(index, 1);
+    };
+
     return {
       ...toRefs(state),
-      addTodo, // Added addTodo to the returned object to fix the template binding error
+      addTodo,
+      deleteTodo,
     };
   },
 });
